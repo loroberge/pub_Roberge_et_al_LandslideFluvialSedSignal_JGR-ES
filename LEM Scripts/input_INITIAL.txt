@@ -1,0 +1,78 @@
+---
+# ---------------------------------------
+# Input parameters for TESSSLA model runs
+# ---------------------------------------
+
+# Grid, time, and other parameters
+
+nrows                  : 40      # CHANGE DEPENDING ON MODEL RUN
+ncols                  : 40      # CHANGE DEPENDING ON MODEL RUN
+channel_threshold_area : 20000   # CHANGE DEPENDING ON MODEL RUN
+
+dx                     : 50.
+dt                     : 25
+total_t                : 2000000
+grid_seed              : 42
+soil_depth_initial     : 0
+uplift_rate            : 0.001
+progress_interval      : 1000
+output_interval        : 250000
+eq_interval            : 500000
+Zm_buffer              : 0.1
+
+grid_fields_to_save    : ['topographic__elevation',
+                           'bedrock__elevation'
+                           ]
+
+# ------------------------------------
+params_sp:   # Parameters for SpaceLargeScaleEroder
+
+  v_s         : 1   # CHANGE DEPENDING ON MODEL RUN
+
+  m_sp        : 0.5
+  n_sp        : 1.
+  K_sed       : 1.0e-4
+  K_br        : 1.0e-5
+  F_f         : 0
+  phi         : 0
+  H_star      : 1.0
+  v_s_lake    : 100000
+  sp_crit_sed : 0
+  sp_crit_br  : 0
+
+# ------------------------------------
+params_ls:   # Parameters for BedrockLandslider
+
+  landslides_return_time       : 100000  # CHANGE DEPENDING ON MODEL RUN
+
+  angle_int_frict              : 0.7
+
+  min_deposition_slope         : 0.01
+  threshold_slope              : 0.7
+
+  cohesion_eff                 : 1.5e4
+  fraction_fines_LS            : 0
+  phi                          : 0
+  max_pixelsize_landslide      : 1e9
+  seed                         : 2021
+  verbose_landslides           : True
+  landslides_on_boundary_nodes : False
+
+# ------------------------------------
+params_fr:   # Parameters for PriorityFloodFlowRouter
+
+  flow_metric             : 'D8'
+  update_flow_depressions : True
+  depression_handler      : 'fill'
+
+# ------------------------------------
+params_ew:   # Parameters for ExponentialWeatherer
+
+  soil_production__maximum_rate  : 0.0003
+  soil_production__decay_depth   : 0.44
+
+# ------------------------------------
+params_ddd:   # Parameters for DepthDependentDiffuser
+
+  linear_diffusivity          : 0.1
+  soil_transport_decay_depth  : 0.1
